@@ -1,0 +1,26 @@
+{
+	"root": true,
+	"parser": "@babel/eslint-parser",
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"parserOptions": {
+		"requireConfigFile": false
+	},
+	"extends": ["eslint:recommended", "plugin:prettier/recommended"],
+	"rules": {
+		"prettier/prettier": [
+			"error",
+			{
+				"singleQuote": true,
+				"useTabs": true,
+				"semi": true,
+				"trailingComma": "all",
+				"bracketSpacing": true,
+				"printWidth": 100,
+				"endOfLine": "auto"
+			}
+		]
+	}
+}
