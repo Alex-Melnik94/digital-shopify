@@ -1,46 +1,8 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
-      "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "inverse",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
@@ -66,10 +28,131 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "571a2947-c410-4ed4-b174-e89afdcd6719": {
+      "type": "products-section",
+      "blocks": {
+        "e9383383-988a-47d4-8e2e-19cb8b052fbb": {
+          "type": "product",
+          "settings": {
+            "product": "pocketful-of-sunshine",
+            "first_tag": "immunity",
+            "second_tag": "stress",
+            "custom_product_title": "Immunity",
+            "cost_per_day": "0.33",
+            "bcg_hover_color": "#fff9c0"
+          }
+        },
+        "2340d276-43d1-4356-8a08-35f55f4e1ee2": {
+          "type": "product",
+          "settings": {
+            "product": "cloud-nine",
+            "first_tag": "mobility",
+            "second_tag": "stress",
+            "custom_product_title": "",
+            "cost_per_day": "0.33",
+            "bcg_hover_color": "#fff9c0"
+          }
+        },
+        "cd035c65-be90-45e3-81ae-11ee3a368dc3": {
+          "type": "product",
+          "settings": {
+            "product": "heart-minds",
+            "first_tag": "heart",
+            "second_tag": "energy",
+            "custom_product_title": "",
+            "cost_per_day": "0.33",
+            "bcg_hover_color": "#fff9c0"
+          }
+        },
+        "34b1d469-dbdf-429c-8227-840f8ad886e3": {
+          "type": "product",
+          "settings": {
+            "product": "in-the-zone",
+            "first_tag": "brain",
+            "second_tag": "energy",
+            "custom_product_title": "",
+            "cost_per_day": "0.33",
+            "bcg_hover_color": "#fff9c0"
+          }
+        }
+      },
+      "block_order": [
+        "e9383383-988a-47d4-8e2e-19cb8b052fbb",
+        "2340d276-43d1-4356-8a08-35f55f4e1ee2",
+        "cd035c65-be90-45e3-81ae-11ee3a368dc3",
+        "34b1d469-dbdf-429c-8227-840f8ad886e3"
+      ],
+      "settings": {
+        "title": "<p>Have you had your daily dose of<br\/>vit today?<\/p>",
+        "subtitle": "<p>Whether you need a daily pick-me up or a little sleep support, our products are developed with the<br\/>end goal in mind. Optimally-dosed, highly bioavailable formulas means you can see and feel<br\/>results that set you on a path to better health.<\/p>",
+        "btn_title": "See All Products",
+        "btn_url": "shopify:\/\/collections\/all",
+        "button_color": "#00afa9",
+        "button_color_hover": "#262d2d",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mob": 30,
+        "padding_bottom_mob": 30
+      }
+    },
+    "670e2711-b54e-4374-9452-ad8841958cda": {
+      "type": "reviews-section",
+      "blocks": {
+        "dacb6a30-f514-45d3-8741-2f1f885a9ef9": {
+          "type": "review",
+          "settings": {
+            "review_photo": "shopify:\/\/shop_images\/Ellipse_37.png",
+            "review_title": "<p>Walking on Sunshine<\/p>",
+            "review_text": "<p>“These little softgels have helped boost my mood and keep me in a positive head space during all the chaos of everyone coming back to work since covid. I suffer from anxiety and depression and this has helped”<\/p>",
+            "review_name": "<p>Amber<\/p>",
+            "product": "pocketful-of-sunshine",
+            "product_title": "",
+            "product_url": ""
+          }
+        },
+        "0eeb8b55-0251-4a14-8887-a2325387deba": {
+          "type": "review",
+          "settings": {
+            "review_photo": "shopify:\/\/shop_images\/Ellipse_37_3.png",
+            "review_title": "<p>Complete one Eighty in the Mood Department<\/p>",
+            "review_text": "<p>“I’ve been one to get frustrated easily while dealing with stressful situations, either while working or with people. But I got annoyed with feeling this way, so I decided to look online and see what  I could find. Came across these and ...”<\/p>",
+            "review_name": "<p>Aicia<\/p>",
+            "product": "cloud-nine",
+            "product_title": "",
+            "product_url": ""
+          }
+        },
+        "68ebe4cb-23a7-4892-9e94-909e6e3d8305": {
+          "type": "review",
+          "settings": {
+            "review_photo": "shopify:\/\/shop_images\/Ellipse_37_4.png",
+            "review_title": "<p>Love this!!!<\/p>",
+            "review_text": "<p>“I love this vitamin, it is so tiny but packs a major punch! This has helped massively with my anxiety and has helped boost me up a little too!”<\/p>",
+            "review_name": "<p>Amber <\/p>",
+            "product": "heart-minds",
+            "product_title": "",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "dacb6a30-f514-45d3-8741-2f1f885a9ef9",
+        "0eeb8b55-0251-4a14-8887-a2325387deba",
+        "68ebe4cb-23a7-4892-9e94-909e6e3d8305"
+      ],
+      "settings": {
+        "title": "Why People Love Us",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mob": 30,
+        "padding_bottom_mob": 30
+      }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "571a2947-c410-4ed4-b174-e89afdcd6719",
+    "670e2711-b54e-4374-9452-ad8841958cda"
   ]
 }
