@@ -1,0 +1,68 @@
+ul {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+  
+h1,
+h2,
+h3,
+h4,
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: $primary-text-color;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    display: block;
+    margin: 0;
+    text-decoration: none;
+}
+
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media screen and (width >= 320px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (width >= 768px) {
+    .container {
+        padding: 0 40px;
+    }
+}
+
+@media screen and (width >= 1024px) {
+    .container { 
+        padding: 0 70px;
+    }
+}
+
+@media screen and (width >= 1440px) {
+    .container {
+        max-width: 1440px;
+        padding: 0 90px;
+    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}

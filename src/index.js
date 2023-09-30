@@ -1,1 +1,2 @@
-console.log("Hello")
+import './scripts/main.js';
+console.log('Hello');

@@ -1,3 +1,5 @@
+config/settings_data.json
+templates/*.json
 package.json
 package-lock.json
 node_modules

@@ -1,0 +1,250 @@
+{% style %}
+	.reviews--{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+{% endstyle %}
+
+{%- capture swiper_settings -%}
+    {
+        "slidesPerView": 1,
+        "loop": true,
+        "pagination": {
+            "el": ".reviews__slider-pagination--{{ section.id }}",
+            "type": "bullets"
+        },
+        "navigation": {
+            "nextEl": ".reviews__slider-next--{{ section.id }}",
+            "prevEl": ".reviews__slider-prev--{{ section.id }}"
+        },
+        "breakpoints": {
+            "1024": {
+                "slidesPerView": 3,
+                "spaceBetween": 20
+            },
+            "768": {
+                "slidesPerView": 2,
+                "spaceBetween": 15,
+                "loop": false
+            }
+        }
+    }
+{%- endcapture -%}
+
+<div class="container reviews reviews--{{ section.id }}">
+    {% if section.settings.title != blank %}
+        <div class="reviews__section-title">
+            {{ section.settings.title }}
+        </div>
+    {% endif %}
+    <div class="reviews__wrapper">
+        <div class="reviews__slider-prev reviews__slider-prev--{{ section.id }}">
+            {% render 'icon', icon: 'chevron' %}
+        </div>
+        <slider-cards data-settings="{{ swiper_settings | escape }}"
+            class="reviews__slider swiper"
+        >
+            <ul class="reviews__list swiper-wrapper">
+                {% for block in section.blocks %}
+                    <li class="reviews__list-item swiper-slide">
+                        <div>
+                            <div class="reviews__top-container">
+                                <div>
+                                    <div class="reviews__stars-container">
+                                        {% if block.settings.review_photo != blank %}     
+                                            <div class="reviews__photo">
+                                                {% render 'image', image: block.settings.review_photo %}
+                                            </div>
+                                        {% else %}
+                                            <div class="reviews__photo">
+                                                {{ 'image' | placeholder_svg_tag: 'reviews__product-image--placeholder' }}
+                                            </div>
+                                        {% endif %}
+                                        {% for i in (1..5) %}
+                                            {% render 'icon', icon: 'review-star' %}
+                                        {% endfor %}
+                                    </div>
+                                    {% if block.settings.review_title != blank %}
+                                        <div class="reviews__title">
+                                            {{ block.settings.review_title }}
+                                        </div>
+                                    {% endif %}
+                                    {% if block.settings.review_text != blank %}
+                                        <div class="reviews__text">
+                                            {{ block.settings.review_text }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if block.settings.review_name != blank %}
+                                    <div class="reviews__name">
+                                        {{ block.settings.review_name }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="reviews__bottom-container">
+                                {% if block.settings.product_url != blank %}
+                                    <a href="{{ block.settings.product_url }}" class="reviews__product-link"></a>
+                                    {% else %}
+                                    <a href="{{ block.settings.product.url }}" class="reviews__product-link"></a>
+                                {% endif %}
+                                <div class="reviews__product-container">
+                                    <div class="reviews__product-image">
+                                        {% if block.settings.product_image != blank %}
+                                            {% render 'image', image: block.settings.product_image %}
+                                        {% elsif block.settings.product != blank %}
+                                            {% render 'image', image: block.settings.product.featured_image %}
+                                        {% else %}
+                                            {{ 'image' | placeholder_svg_tag: 'reviews__product-image--placeholder' }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="reviews__product-title">
+                                        {% if block.settings.product_title != blank %}
+                                            {{ block.settings.product_title }}
+                                        {% else %}
+                                            {{ block.settings.product.title }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="reviews__product-arrow">
+                                        {% render 'icon', icon: 'arrow' %}
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        
+                    </li>
+                {% endfor %}
+            </ul>
+            <div
+                class="reviews__slider-pagination reviews__slider-pagination--{{ section.id }}"
+            ></div>
+        </slider-cards>
+        <div class="reviews__slider-next reviews__slider-next--{{ section.id }}">
+            {% render 'icon', icon: 'chevron' %}
+        </div>
+    </div>
+    
+</div>
+
+{% schema %}
+{
+    "name": "Reviews",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section Title",
+            "default": "Why People Love Us"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Section Padding Top Desktop",
+            "default": 60
+          },
+          {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Section Padding Bottom Desktop",
+            "default": 60
+          },
+          {
+            "type": "range",
+            "id": "padding_top_mob",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Section Padding Top Mobile",
+            "default": 30
+          },
+          {
+            "type": "range",
+            "id": "padding_bottom_mob",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Section Padding Bottom Mobile",
+            "default": 30
+          }
+    ],
+    "blocks": [
+        {
+            "name": "Review",
+            "type": "review",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "review_photo",
+                    "label": "Review Photo"
+                },
+                {
+                    "type": "richtext",
+                    "id": "review_title",
+                    "label": "Review Title",
+                    "default": "<p>Walking on Sunshine</p>"
+                },
+                {
+                    "type": "richtext",
+                    "id": "review_text",
+                    "label": "Review Text",
+                    "default": "<p>“These little softgels have helped boost my mood and keep me in a positive head space during all the chaos of everyone coming back to work since covid. I suffer from anxiety and depression and this has helped”</p>"
+                },
+                {
+                    "type": "richtext",
+                    "id": "review_name",
+                    "label": "Review Name",
+                    "default": "<p>Amber</p>"
+                },
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Reviewed Product"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "product_image",
+                    "label": "Product Image",
+                    "info": "If no image is selected, the main image of the product is displayed."
+                },
+                {
+                    "type": "text",
+                    "id": "product_title",
+                    "label": "Product Title",
+                    "info": "If the text field is not filled in, the full product title is displayed."
+                },
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product URL",
+                    "info": "If the product URL is not filled in, the selected product URL is applied."
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "name": "Reviews",
+            "blocks": [
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				}
+			]
+        }
+    ]
+}
+{% endschema %}

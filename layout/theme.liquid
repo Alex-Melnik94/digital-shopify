@@ -202,6 +202,13 @@
         --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
         --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
         --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+        
+        --primary-text-color: #363636;
+        --button-text-color: #FFFFFF;
+        --button-bcg-color: #00AFA9;
+        --content-bcg-color: #DFFFFD;
+        --tag-border-color: #D7D2CC;
+        --box-shadow-color: #00000021;
       }
 
       *,
@@ -236,6 +243,20 @@
         }
       }
     {% endstyle %}
+
+    <style>
+      @font-face {
+          font-family: 'F37 Ginger';
+          src: url({{'F37-ginger-regular.woff'|asset_url}}) format('woff');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+      }
+      html * {
+          font-family: 'F37 Ginger', sans-serif !important;
+      }
+    </style>
+   
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'index.css' | asset_url | stylesheet_tag }}

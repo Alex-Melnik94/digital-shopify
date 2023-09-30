@@ -1,0 +1,22 @@
+{% liquid
+	assign loading = loading | default: 'lazy'
+	assign sizes = sizes | default: '100vw'
+	assign widths = widths | default: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840, 4500, 5760'
+%}
+
+{% if image != blank %}
+	{{
+		image
+		| image_url: width: image.width
+		| image_tag:
+			loading: loading,
+			width: image.width,
+			height: image.height,
+			alt: image.alt,
+			sizes: sizes,
+			widths: widths,
+			class: class
+	}}
+{% else %}
+    {{ 'image' | placeholder_svg_tag }}
+{% endif %}

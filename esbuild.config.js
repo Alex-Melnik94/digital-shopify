@@ -6,7 +6,7 @@ import autoprefixer from 'autoprefixer';
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 const ctx = await esbuild.context({
-	entryPoints: ["src/index.js", "src/index.scss"],
+	entryPoints: ['src/index.js', 'src/index.scss'],
 	entryNames: '[name]',
 	outdir: 'assets',
 	target: 'es2017',

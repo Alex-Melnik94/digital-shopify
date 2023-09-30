@@ -1,0 +1,336 @@
+
+{% style %}
+	.products-section--{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+{% endstyle %}
+
+{%- capture swiper_settings -%}
+    {
+        "slidesPerView": 1,
+        "pagination": {
+            "el": ".products-section__slider-pagination--{{ section.id }}",
+            "type": "bullets"
+        },
+        "navigation": {
+            "nextEl": ".products-section__slider-next--{{ section.id }}",
+            "prevEl": ".products-section__slider-prev--{{ section.id }}"
+        },
+        "breakpoints": {
+            "1280": {
+                "slidesPerView": 4,
+                "spaceBetween": 25
+            },
+            "1024": {
+                "slidesPerView": 3,
+                "spaceBetween": 20
+            },
+            "768": {
+                "slidesPerView": 2,
+                "spaceBetween": 15
+            }
+        }
+    }
+{%- endcapture -%}
+
+<div  class="container products-section products-section--{{ section.id }}">
+	<div class="products-section__title-wrapper">
+		<div class="products-section__title">
+			{{ section.settings.title }}
+		</div>
+		<div class="products-section__subtitle">
+			{{ section.settings.subtitle }}
+		</div>
+	</div>
+	<div class="products-section__products-wrapper">
+        <div class="products-section__slider-prev products-section__slider-prev--{{ section.id }}">
+            {% render 'icon', icon: 'chevron' %}
+        </div>
+        <slider-cards data-settings="{{ swiper_settings | escape }}"
+            class="products-section__products-slider swiper"
+        >
+            <ul class="products-section__products-list swiper-wrapper">
+                {% for block in section.blocks %}
+                    {% style %}
+                        @media screen and (min-width: 768px) {
+                            .products-section__product-item:hover .products-section__media-container--{{ section.id }}--{{ forloop.index }} {
+                                background-color: {{ block.settings.bcg_hover_color }}
+                            }
+                            .products-section__btn--{{ section.id }} {
+                                background-color: {{ section.settings.button_color }};
+                            }
+                            .products-section__btn--{{ section.id }}:hover {
+                                background-color: {{ section.settings.button_color_hover }};
+                            }   
+                          
+                        }
+                    {% endstyle %}
+                    <li class="products-section__product-item swiper-slide">
+                        {% if block.settings.product != blank %}
+                            <a href="{{ block.settings.product.url }}" class="products-section__product-link"></a>
+                        {% endif %}
+                        {% if block.settings.cost_per_day != blank %}
+                            <div class="products-section__product-cpd">
+                                <p class="products-section__product-cpd--price">${{ block.settings.cost_per_day }}</p>
+                                <p class="products-section__product-cpd--text">/day</p>
+                            </div>
+                        {% endif %}
+                        <div class="products-section__media-container products-section__media-container--{{ section.id }}--{{ forloop.index }}">
+                            <div class="products-section__product-image image-wrapper">
+                                <p>{{ block.product.featured_image.width }}</p>
+                                {% if block.settings.custom_product_img != blank %}
+                                    {% render 'image', image: block.settings.custom_product_img %}
+                                {% elsif block.settings.product != blank %}
+                                    {% render 'image', image: block.settings.product.featured_image %}
+                                {% else %}
+                                    {{ 'image' | placeholder_svg_tag }}    
+                                {% endif %}
+                            </div>
+                            <div class="products-section__tags-container">
+                                <div class="products-section__tag">
+                                    {% render 'icon', icon: block.settings.first_tag %}
+                                    <span>{{ block.settings.first_tag }}</span>
+                                </div>
+                                <div class="products-section__tag">
+                                    {% render 'icon', icon: block.settings.second_tag %}
+                                    <span class="products-section__tag-title">{{ block.settings.second_tag }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="products-section__info-container">
+                            {% if block.settings.custom_product_title != blank %}
+                                <h3 class="products-section__product-title">
+                                    {{ block.settings.custom_product_title }}
+                                </h3>
+                            {% else %}
+                                <h3 class="products-section__product-title">{{ block.settings.product.title }}</h3>
+                            {% endif %}
+                            <p class="products-section__product-price">
+                                {{ block.settings.product.price | money }}
+                            </p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div
+                class="products-section__slider-pagination products-section__slider-pagination--{{ section.id }}"
+            ></div>
+        </slider-cards>
+        <div class="products-section__slider-next products-section__slider-next--{{ section.id }}">
+            {% render 'icon', icon: 'chevron' %}
+        </div>
+    </div>
+	{% if section.settings.btn_title != blank %}
+		<div class="products-section__btn-container">
+			<a href="{{ section.settings.btn_url }}" class="products-section__btn products-section__btn--{{ section.id }}">
+				{{- section.settings.btn_title -}}
+			</a>
+		</div>
+	{% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Products Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<p>Have you had your daily dose of vit today?</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>Whether you need a daily pick-me up or a little sleep support, our products are developed with the end goal in mind. Optimally-dosed, highly bioavailable formulas means you can see and feel results that set you on a path to better health.</p>"
+    },
+    {
+      "type": "text",
+      "id": "btn_title",
+      "label": "Button Title",
+      "default": "See All Products"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    },
+    {
+        "type": "color",
+        "id": "button_color",
+        "label": "Button Color",
+        "default": "#00AFA9"
+    },
+    {
+        "type": "color",
+        "id": "button_color_hover",
+        "label": "Button Hover Color",
+        "default": "#00AFA9"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Section Padding Top Desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Section Padding Bottom Desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Section Padding Top Mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Section Padding Bottom Mobile",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_product_img",
+          "label": "Product Image",
+          "info": "If no image is selected, the main image of the product is displayed."
+        },
+        {
+          "type": "select",
+          "id": "first_tag",
+          "label": "First Tag",
+          "options": [
+            {
+              "value": "immunity",
+              "label": "Immunity"
+            },
+            {
+              "value": "stress",
+              "label": "Stress"
+            },
+            {
+              "value": "mobility",
+              "label": "Mobility"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "energy",
+              "label": "Energy"
+            },
+            {
+              "value": "brain",
+              "label": "Brain"
+            }
+          ],
+          "default": "immunity"
+        },
+        {
+          "type": "select",
+          "id": "second_tag",
+          "label": "Second Tag",
+          "options": [
+            {
+              "value": "immunity",
+              "label": "Immunity"
+            },
+            {
+              "value": "stress",
+              "label": "Stress"
+            },
+            {
+              "value": "mobility",
+              "label": "Mobility"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "energy",
+              "label": "Energy"
+            },
+            {
+              "value": "brain",
+              "label": "Brain"
+            }
+          ],
+          "default": "stress"
+        },
+        {
+          "type": "text",
+          "id": "custom_product_title",
+          "label": "Product Title",
+          "info": "If the text field is not filled in, the full product title is displayed."
+        },
+        {
+          "type": "text",
+          "id": "cost_per_day",
+          "label": "Cost Per Day",
+          "default": "0.33"
+        },
+        {
+          "type": "color",
+          "id": "bcg_hover_color",
+          "label": "Product card background hover color",
+          "default": "#FFF9C0"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products Section",
+      "blocks": [
+        {
+            "type": "product"
+        },
+        {
+            "type": "product"
+        },
+        {
+            "type": "product"
+        },
+        {
+            "type": "product"
+        }
+    ]
+    }
+  ]
+}
+{% endschema %}
