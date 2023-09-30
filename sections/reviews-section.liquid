@@ -46,9 +46,30 @@
         >
             <ul class="reviews__list swiper-wrapper">
                 {% for block in section.blocks %}
+
+                    {% style %}
+                        .reviews__bottom-container--{{ section.id }}--{{ forloop.index }} {
+                            background-color: {{ block.settings.product_bcg_color }}       
+                        }
+
+                        .reviews__top-container--{{ section.id }}--{{ forloop.index }} {
+                            background-color: {{ block.settings.content_bcg_color }} 
+                        }
+                        
+                        @media screen and (min-width: 768px) {
+                            .reviews__bottom-container--{{ section.id }}--{{ forloop.index }}:hover {
+                                background-color: {{ block.settings.product_bcg_color_hover }}  
+                            }
+
+                            .reviews__top-container--{{ section.id }}--{{ forloop.index }}:hover {
+                                background-color: {{ block.settings.content_bcg_color_hover }} 
+                            }
+                        }
+                    {% endstyle %}
+
                     <li class="reviews__list-item swiper-slide">
                         <div>
-                            <div class="reviews__top-container">
+                            <div class="reviews__top-container reviews__top-container--{{ section.id }}--{{ forloop.index }}">
                                 <div>
                                     <div class="reviews__stars-container">
                                         {% if block.settings.review_photo != blank %}     
@@ -81,7 +102,7 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="reviews__bottom-container">
+                            <div class="reviews__bottom-container reviews__bottom-container--{{ section.id }}--{{ forloop.index }}">
                                 {% if block.settings.product_url != blank %}
                                     <a href="{{ block.settings.product_url }}" class="reviews__product-link"></a>
                                     {% else %}
@@ -205,6 +226,18 @@
                     "default": "<p>Amber</p>"
                 },
                 {
+                    "type": "color",
+                    "id": "content_bcg_color",
+                    "label": "Content background color",
+                    "default": "#DFFFFD"
+                },
+                {
+                    "type": "color",
+                    "id": "content_bcg_color_hover",
+                    "label": "Content background hover color",
+                    "default": "#DFFFFD"
+                },
+                {
                     "type": "product",
                     "id": "product",
                     "label": "Reviewed Product"
@@ -226,6 +259,18 @@
                     "id": "product_url",
                     "label": "Product URL",
                     "info": "If the product URL is not filled in, the selected product URL is applied."
+                },
+                {
+                    "type": "color",
+                    "id": "product_bcg_color",
+                    "label": "Product background color",
+                    "default": "#00AFA9"
+                },
+                {
+                    "type": "color",
+                    "id": "product_bcg_color_hover",
+                    "label": "Product background hover color",
+                    "default": "#00AFA9"
                 }
             ]
         }
